@@ -91,6 +91,6 @@ export async function saveChat(message_array, user_id) {
   }
   else {
     // there are no chats previously
-    let { error } = supabase.from("chats").insert({ messages: message_array })
+    let { error } = supabase.from("chats").insert({ messages: message_array, user_id: user_id })
   }
 }
