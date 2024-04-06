@@ -17,6 +17,11 @@ const Nav = () => {
         router.push("/");
         router.refresh();
     }
+    useEffect(() => {
+        const getLoginData = async () => {
+            const { data } = await supabase.auth.getSession();
+        }
+    }, [])
     return (
         <div>Nav</div>
     )
