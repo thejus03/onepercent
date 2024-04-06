@@ -9,6 +9,15 @@ if (!supabaseKey || !supabaseUrl) {
   throw new Error("key or url is missng from env variables!");
 }
 
+export async function fetchUserDetails(user_id) {
+  const { data, error } = await supabase.auth.admin.getUserById(user_id);
+  if (error) {
+    console.log("error fetching user details:", error);
+    return;
+  }
+  return data;
+}
+
 export async function addUser(user_id, name, email, profile_image) {
   let { error } = await supabase.from("user").insert({
     id: user_id,
