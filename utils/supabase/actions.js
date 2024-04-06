@@ -114,3 +114,12 @@ export async function saveChat(message_array, user_id) {
     let { error } = supabase.from("chats").insert({ messages: message_array, user_id: user_id })
   }
 }
+
+export async function getServices() {
+  let { data, error } = await supabase.from("service").select()
+  if (error) {
+    console.log("error fetching the services", error)
+    return
+  }
+  return data
+}
