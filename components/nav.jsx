@@ -23,8 +23,25 @@ const Nav = () => {
     const getLoginData = async () => {
       const { data } = await supabase.auth.getSession();
       setLoginData(data)
+      if (data.session.user.user_metadata.name.length > 0) {
+        setIsLoggedIn(true)
+        // when the user is logged in add it to the users table
+        const response = await fetch('/api/user', {
+          method: 'POST',
+          headers: {
+            'Content-type': 'application/json'
+          },
+          body: JSON.stringify({
+            name: data?.session.user.user_metadata.name,
+            email: data?.session.user.user_metadata.email,
+            image: data?.session.user.user_metadata.picture,
+            id: data?.session.user.id,
+          })
+        })
+      }
+      getLoginData()
     }
-  }, [])
+  }, [isLoggedIn])
   return (
     <div>Nav</div>
   )
