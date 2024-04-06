@@ -9,8 +9,8 @@ const ProfileCards = () => {
                 <div className="py-16">
                     <div className="mx-auto px-6 max-w-6xl text-gray-500">
                         <div className="text-center">
-                            <h2 className="text-3xl text-gray-950 dark:text-white font-semibold">Welcome to your business</h2>
-                            <p className="mt-6 text-gray-700 dark:text-gray-300">These are your posts</p>
+                            <h2 className="text-3xl text-gray-950 font-semibold">Welcome to your business</h2>
+                            <p className="mt-6 text-gray-700 ">These are your posts</p>
                         </div>
                         <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
                             {/* one element */}
