@@ -12,6 +12,19 @@ const SearchComponent = () => {
   const searchParams = useSearchParams()
   const pathname = usePathname();
 
+  const handleSearch = useDebouncedCallback((term) => {
+    const params = new URLSearchParams(searchParams)
+    if (term) {
+      params.set("query", term)
+      setQuery(term)
+    } else {
+      params.delete("query")
+      setQuery('')
+    }
+    // update URL
+    replace(`${pathname}?${params.toString()}`)
+  }, 600)
+
   return (
     <div className='relative flex flex-col'>
       <input
