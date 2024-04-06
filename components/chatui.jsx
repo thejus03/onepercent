@@ -3,24 +3,28 @@ import React, { useEffect, useState } from 'react';
 import { IoMdSend } from "react-icons/io";
 import Image from 'next/image';
 function ChatPage() {
-  const [messages, setMessages] = useState([]);
   const [inputValue, setInputValue] = useState('');
-  
-    const messageList = [{'user':'im retarded'},{'bot':'im not'},{'user':'im retarded'},{'bot':'im not'}]
+  const [messages, setMessages] = useState([{
+    "role": "system", "content":"You are a chatbot for the Singapore Government that answers the questions accurately and succinctly to help businesses with their problems. Instructions: - Only answer questions about Singapore government. - If you are unsure about the question, then reply with 'I am not sure'. Context: - In the services page of our website, it has info about govt services. - In the network page, we can connect with other Singapore businesses."
+    }]);
+    const messageList = [{'role':'user','content':'IM THE STUPID TEXT'},{'role':'assistant','content':'NO'}]
   useEffect(() => {
-    //fetch bot string
-    //fetch user string
+    //getChats()
   }, [])
   
-
-  const handleSendMessage = () => {
-    if (!inputValue.trim()) return;
-    setMessages([...messages, { type: 'user', text: inputValue }]);
-    setInputValue('');
-    setTimeout(() => {
-      setMessages([...messages, { type: 'bot', text: 'Bot response goes here' }]);
-    }, 1000);
-  };
+  const handleSendMessage = async () => {
+    setMessages((prev)=>[...prev, {'role':'user','content':inputValue}])
+    const response = await fetch('/api/bot',{
+        method:'POST',
+        body:JSON.stringify({
+            messages:messages
+      })
+      
+      
+  })
+  const finalresponse = await response.json()
+  console.log(finalresponse)
+};
 
   return (
     <div className="">
