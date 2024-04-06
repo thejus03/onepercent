@@ -86,7 +86,7 @@ const Nav = () => {
                       Services
                     </a>
                     <a
-                      href="/network"
+                      href="/onepercent/network"
                       className={`rounded-md px-3 py-2 ${pathname == '/network' && 'bg-gray-900'} text-sm font-medium text-white`}
                     >
                       Network

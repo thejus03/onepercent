@@ -103,3 +103,31 @@ export async function saveChat(message_array, user_id) {
     let { error } = supabase.from("chats").insert({ messages: message_array, user_id: user_id })
   }
 }
+
+export async function getAllTags() {
+  const { data, error } = await supabase
+    .from('tags')
+    .select('*')
+  let getAllTags = data.map((row) => (row.tags))
+  return getAllTags;
+}
+
+export async function getNetworkCards() {
+  const { data, error } = await supabase.from('network').select('*').order("created_at", { ascending: false })
+  return data
+}
+
+export async function createNetworkPost(title, description, image, creator_id, tags, user_image, username) {
+  const html_id = crypto.randomBytes(4).toString('hex');
+  let { error } = await supabase.from("network").insert({
+    title: title,
+    description: description,
+    image: image,
+    creator_id: creator_id,
+    html_id: html_id,
+    tags: tags,
+    creator_image: user_image,
+    creator_name: username
+  })
+
+}

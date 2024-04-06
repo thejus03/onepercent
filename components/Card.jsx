@@ -1,6 +1,6 @@
 'use client'
 import Image from 'next/image'
-//import Modal from './Modal'
+import Modal from './Modal'
 import { useState } from 'react'
 
 const people = [
@@ -33,13 +33,14 @@ const people = [
 
 export default function Card() {
     const [currentCard, setCurrentCard] = useState('')
+    const [modal,setModal]= useState(false)
     return (
         <div className='space-y-4'>
             <div className='px-[70px] py-[30px] bg-gray-800 rounded-2xl'>
             <p className='text-xl ml-3 font-bold text-white mb-6'>💲Financial Services</p>
             <ul role="list" className="w-full gap-2 space-y-2 ">
                 {people.map((person) => (
-                    <li key={person.name} className=" w-full md:w-[40vw] divide-y divide-gray-200 rounded-lg bg-white shadow" onClick={() => setCurrentCard(person.name)}>
+                    <li key={person.name} className=" w-full md:w-[40vw] divide-y divide-gray-200 rounded-lg bg-white shadow" onClick={() => setModal(true)}>
                         <div className="flex w-full items-center justify-between space-x-6 p-6">
                             <div className="flex-1 truncate">
                                 <div className="flex items-center space-x-3">
@@ -54,14 +55,13 @@ export default function Card() {
                         </div>
                     </li>
                 ))}
-                {currentCard && <Modal name={currentCard} setModal={setCurrentCard} />}
             </ul>
             </div>
             <div className='px-[70px] py-[30px] bg-gray-800 rounded-2xl'>
             <p className='text-xl ml-3 font-bold text-white mb-6'>💪🏻Manpower Services</p>
             <ul role="list" className="w-full gap-2 space-y-2 ">
                 {people.map((person) => (
-                    <li key={person.name} className=" w-full md:w-[40vw] divide-y divide-gray-200 rounded-lg bg-white shadow" onClick={() => setCurrentCard(person.name)}>
+                    <li key={person.name} className=" w-full md:w-[40vw] divide-y divide-gray-200 rounded-lg bg-white shadow" onClick={() => setModal(true)}>
                         <div className="flex w-full items-center justify-between space-x-6 p-6">
                             <div className="flex-1 truncate">
                                 <div className="flex items-center space-x-3">
@@ -76,14 +76,13 @@ export default function Card() {
                         </div>
                     </li>
                 ))}
-                {currentCard && <Modal name={currentCard} setModal={setCurrentCard} />}
             </ul>
             </div>
             <div className='px-[70px] py-[30px] bg-gray-800 rounded-2xl'>
             <p className='text-xl ml-3 font-bold text-white mb-6'>🏢 Infrastructure Services</p>
             <ul role="list" className="w-full gap-2 space-y-2 ">
                 {people.map((person) => (
-                    <li key={person.name} className=" w-full md:w-[40vw] divide-y divide-gray-200 rounded-lg bg-white shadow" onClick={() => setCurrentCard(person.name)}>
+                    <li key={person.name} className=" w-full md:w-[40vw] divide-y divide-gray-200 rounded-lg bg-white shadow" onClick={() => setModal(true)}>
                         <div className="flex w-full items-center justify-between space-x-6 p-6">
                             <div className="flex-1 truncate">
                                 <div className="flex items-center space-x-3">
@@ -98,10 +97,10 @@ export default function Card() {
                         </div>
                     </li>
                 ))}
-                {currentCard && <Modal name={currentCard} setModal={setCurrentCard} />}
             </ul>
             </div>
-            
+            {modal && <Modal setModal={setModal} />}
+
         </div>
     )
 }
