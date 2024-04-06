@@ -9,6 +9,15 @@ if (!supabaseKey || !supabaseUrl) {
   throw new Error("key or url is missng from env variables!");
 }
 
+export async function fetchUserDetails(user_id) {
+  const { data, error } = await supabase.auth.admin.getUserById(user_id);
+  if (error) {
+    console.log("error fetching user details:", error);
+    return;
+  }
+  return data;
+}
+
 export async function addUser(user_id, name, email, profile_image) {
   let { error } = await supabase.from("user").insert({
     id: user_id,
@@ -73,7 +82,7 @@ export async function universalSearch(query) {
 // FOR chatbot
 export async function getChats(user_id) {
   let { data, error } = await supabase.from("chats").select().match({ id: user_id })
-  if (data.length > 0) {
+  if (data?.length > 0) {
     return data
   }
 }
@@ -82,7 +91,7 @@ export async function getChats(user_id) {
 export async function saveChat(message_array, user_id) {
   // remove the system message
   const fetchedChatsData = await getChats(user_id)
-  if (fetchedChatsData.length > 0) {
+  if (fetchedChatsData?.length > 0) {
     let clean_message_array = message_array.slice(1)
     // the previous messages
     let fetchedChatsArray = fetchedChats[0].messages
