@@ -1,6 +1,17 @@
 import React from 'react'
+import { useState, useEffect } from 'react'
+import { useSearchParams, usePathname, useRouter } from 'next/navigation'
+import { useDebouncedCallback } from "use-debounce"
+import { universalSearch } from '../utils/supabase/actions'
 
 const SearchComponent = () => {
+  const router = useRouter()
+  const { replace } = useRouter()
+  const [query, setQuery] = useState("")
+  const [queryResults, setQueryResults] = useState([])
+  const searchParams = useSearchParams()
+  const pathname = usePathname();
+
   return (
     <div className='relative flex flex-col'>
       <input
