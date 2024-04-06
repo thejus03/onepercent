@@ -12,17 +12,19 @@ export default function SearchComponent() {
   const searchParams = useSearchParams() 
   const pathname = usePathname(); 
  
-  const handleRedirect = (redirecturl, redirectsection, event) => { 
+  const handleRedirect = (redirecturl, redirectsection, event) => {
+    console.log(redirectsection,'mofo')
     const params = new URLSearchParams(searchParams) 
     params.set("animate",redirectsection)
     
     router.push(`/${redirecturl =='network'? 'network':''}?${params.toString()}`) 
     setTimeout(()=>{ 
       const sectionElement = document.getElementById(redirectsection) 
+      console.log(sectionElement,'texty text')
     if (sectionElement) { 
       sectionElement.scrollIntoView({ behavior: 'smooth' }); 
     } 
-    },3000) 
+    },1500) 
      setQuery('')
   } 
  
@@ -72,7 +74,7 @@ export default function SearchComponent() {
           <li onClick={() => handleRedirect(result.tag, result.html_id, event)} className='py-2 px-4 hover:bg-gray-100 border-y-[1px] border-grey-100' key={i}> 
             <div className='max-w-full'> 
               <h4 className='font-bold'>{result.title}</h4> 
-              <span className='flex flex-wrap max-w-full whitespace-normal text-wrap break-all'>{result.description}</span> 
+              <span className='flex flex-wrap max-w-full whitespace-normal text-wrap break-all'>{result.description.length > 100 ? result.description.slice(0,100)+'...':result.description}</span> 
             </div> 
           </li> 
         ))} 
