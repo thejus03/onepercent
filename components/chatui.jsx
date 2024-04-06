@@ -23,14 +23,14 @@ function ChatPage() {
       
   })
   const finalresponse = await response.json()
-  console.log(finalresponse)
+  setMessages(finalresponse)
 };
 
   return (
     <div className="">
       <div className="p-4 bg-white overflow-auto h-[40vh] rounded-lg">
         <div className='space-y-4 w-auto flex flex-col'>
-        {messageList.map((message, index) => (
+        {messageList.slice(1,-1).map((message, index) => (
           <div key={index} className={`${Object.keys(message)[0] == 'user' ?'justify-end': 'justify-start'} p-2 px-4 rounded-full flex `}>
             {Object.keys(message)[0] !== 'user' && <Image width={30} height={30} className='rounded-full overflow-hidden' src='/bot.png'/>}
             <span className='bg-gray-100 rounded-full ml-2 px-4 p-2'>{Object.values(message)[0]}</span>
