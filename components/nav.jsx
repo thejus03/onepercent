@@ -131,7 +131,7 @@ const Nav = () => {
                   </button>
 
                   {/* Profile dropdown */}
-                  <Menu as="div" className="relative ml-4 flex-shrink-0">
+                  <Menu as="div" className="relative ml-4 flex-shrink-0 ">
                     <div>
                       <Menu.Button className="relative flex rounded-full bg-gray-800 text-sm text-white focus:outline-none">
                         <span className="absolute -inset-1.5" />
@@ -147,13 +147,13 @@ const Nav = () => {
                       leaveFrom="transform opacity-100 scale-100"
                       leaveTo="transform opacity-0 scale-95"
                     >
-                      {isLoggedIn ? <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                      {isLoggedIn ? <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-gray-900 py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                         <Menu.Item>
                           {() => (
                             <a
                               href={`onepercent/profile/${loginData.session.user.id}`}
                               className={`${pathname.startsWith('onepercent/profile') && 'bg-gray-100'}
-                                block px-4 py-2 text-sm text-gray-700
+                                block px-4 py-2 text-sm text-white
                               `}
                             >
                               Your Profile
@@ -164,7 +164,7 @@ const Nav = () => {
                           {({ active }) => (
                             <button
                               className={`${pathname.startsWith('onepercent/profile') && 'bg-gray-100'}
-                                block px-4 py-2 text-sm text-gray-700
+                                block px-4 py-2 text-sm text-white
                               `}
                               onClick={signOutFromLinkedin}
                             >
@@ -173,12 +173,12 @@ const Nav = () => {
                           )}
                         </Menu.Item>
                       </Menu.Items> :
-                        <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                        <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-gray-900  py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                           <button
                             type='button'
 
                             onClick={signInWithLinkedIn}
-                            className='text-black pl-4'
+                            className='text-white pl-4'
                           ><span className='text-sm'>Sign In</span>
                           </button>
                         </Menu.Items>}
