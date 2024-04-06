@@ -28,6 +28,48 @@ export async function checkUser(user_id) {
   return false
 }
 
+export async function universalSearch(query) {
+  if (query.length === 0) return
+  const tags = await getAllTags()
+  if (tags.includes(query)) {
+    const { data: networkData, error: networkError } = await supabase
+      .from('network')
+      .select('html_id,title,description,tags')
+    const filteredNetworkData = networkData.filter(data => data?.tags?.includes(query))
+    const networkDataWithTag = filteredNetworkData?.map(item => ({ ...item, tag: 'network' }));
+    return networkDataWithTag
+
+  }
+  const { data: networkData, error: networkError } = await supabase
+    .from('network')
+    .select('html_id,title,description')
+    .or(`title.ilike.%${query}%,description.ilike.%${query}%`)
+    .limit(6)
+
+  if (networkError) {
+    console.error('Error fetching network data:', networkError.message);
+    return [];
+  }
+
+  const { data: serviceData, error: serviceError } = await supabase
+    .from('service')
+    .select('html_id,title,description')
+    .or(`title.ilike.%${query}%,description.ilike.%${query}%`)
+    .limit(6)
+  if (serviceError) {
+    console.error('Error fetching service data:', serviceError.message);
+    return [];
+  }
+
+  // Combine the rows/results from both tables
+  const networkDataWithTag = networkData.map(item => ({ ...item, tag: 'network' }));
+  const serviceDataWithTag = serviceData.map(item => ({ ...item, tag: 'service' }));
+
+  const combinedData = [...networkDataWithTag, ...serviceDataWithTag];
+
+  return combinedData;
+}
+
 // FOR chatbot
 export async function getChats(user_id) {
   let { data, error } = await supabase.from("chats").select().match({ id: user_id })
