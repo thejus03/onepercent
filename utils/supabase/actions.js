@@ -123,7 +123,7 @@ export async function getAllTags() {
 // FOR chatbot
 export async function getChats(user_id) {
   let { data, error } = await supabase.from("chats").select().match({ id: user_id })
-  if (data.length > 0) {
+  if (data?.length > 0) {
     return data
   }
 }

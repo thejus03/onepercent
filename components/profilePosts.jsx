@@ -22,7 +22,7 @@ const ProfilePosts = ({ user_id }) => {
       <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
       {posts?.map((card) =>
           <div
-            className=" relative group overflow-hidden p-8 rounded-xl bg-white"
+            className=" relative group overflow-hidden p-8 mx-[20px] rounded-xl bg-white"
           >
             <div >
               <div aria-hidden="true" className="inset-0 absolute aspect-video border rounded-full -translate-y-1/2 group-hover:-translate-y-1/4 duration-300   blur-2xl opacity-25 "></div>
