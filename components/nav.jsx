@@ -85,8 +85,8 @@ const Nav = () => {
                       Services
                     </a>
                     <a
-                      href="/network"
-                      className={`rounded-md px-3 py-2 ${pathname == '/network' && 'bg-gray-900'} text-sm font-medium text-white`}
+                      href="onepercent/network"
+                      className={`rounded-md px-3 py-2 ${pathname == 'onepercent/network' && 'bg-gray-900'} text-sm font-medium text-white`}
                     >
                       Network
                     </a>
@@ -151,8 +151,8 @@ const Nav = () => {
                         <Menu.Item>
                           {() => (
                             <a
-                              href={`/profile/${loginData.session.user.id}`}
-                              className={`${pathname.startsWith('/profile') && 'bg-gray-100'}
+                              href={`onepercent/profile/${loginData.session.user.id}`}
+                              className={`${pathname.startsWith('onepercent/profile') && 'bg-gray-100'}
                                 block px-4 py-2 text-sm text-gray-700
                               `}
                             >
@@ -163,7 +163,7 @@ const Nav = () => {
                         <Menu.Item>
                           {({ active }) => (
                             <button
-                              className={`${pathname.startsWith('/profile') && 'bg-gray-100'}
+                              className={`${pathname.startsWith('onepercent/profile') && 'bg-gray-100'}
                                 block px-4 py-2 text-sm text-gray-700
                               `}
                               onClick={signOutFromLinkedin}
@@ -201,7 +201,7 @@ const Nav = () => {
               </Disclosure.Button>
               <Disclosure.Button
                 as="a"
-                href="/network"
+                href="onepercent/network"
                 className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
               >
                 Network
@@ -233,7 +233,7 @@ const Nav = () => {
                     <Disclosure.Button
                       as="a"
                       // href={`/profile/${loginData.session.user.id}`} //href giving error, so im using onClick
-                      onClick={() => router.push(`/profile/${loginData.session.user.id}`)}
+                      onClick={() => router.push(`onepercent/profile/${loginData.session.user.id}`)}
                       className="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white"
                     >
                       Your Profile
