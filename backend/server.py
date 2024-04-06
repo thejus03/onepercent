@@ -42,4 +42,7 @@ def openAI():
     conversations.append(
         {"role": "assistant", "content": response.choices[0].message.content}
     )
-    return jsonify({"response": response.choices[0].message.content}), 200
+    return jsonify({"conversations": conversations}), 200
+
+if __name__ == "__main__":
+    app.run(debug=True)
