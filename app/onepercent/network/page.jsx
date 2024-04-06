@@ -2,44 +2,46 @@
 import React, { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import Image from 'next/image'
-import { getNetworkCards } from '../utils/supabase/actions'
-import { supabaseBrowser } from '../utils/supabase/client';
+// import { getNetworkCards } from '../utils/supabase/actions'
+// import { supabaseBrowser } from '../utils/supabase/client';
+import Chatui from '@/components/chatui'
 
 const NetworkCards = ({ loading, setCreateModal, searchParams }) => {
   const [user, setUser] = useState(null)
   const [cards, setCards] = useState([])
   const [animationID, setAnimationID] = useState('')
   const animate = searchParams?.animate || ''
-  useEffect(() => {
-    const fetchCards = async () => {
-      const fetchNetworkCards = await getNetworkCards()
-      setCards(fetchNetworkCards)
-    }
-    fetchCards()
-    fetchUserDeets()
-  }, [loading])
+//   useEffect(() => {
+//     const fetchCards = async () => {
+//       const fetchNetworkCards = await getNetworkCards()
+//       setCards(fetchNetworkCards)
+//     }
+//     fetchCards()
+//     fetchUserDeets()
+//   }, [loading])
 
-  const supabase = supabaseBrowser()
-  const fetchUserDeets = async () => {
-    const { data } = await supabase.auth.getSession();
-    setUser(data)
-}
+//   const supabase = supabaseBrowser()
+//   const fetchUserDeets = async () => {
+//     const { data } = await supabase.auth.getSession();
+//     setUser(data)
+// }
 
-  useEffect(() => {
-    setAnimationID(animate)
-    setTimeout(() => {
-      setAnimationID('')
-      const params = new URLSearchParams(searchParams)
-      params.delete('animate')
-    }, 500)
-  }, [animate])
+//   useEffect(() => {
+//     setAnimationID(animate)
+//     setTimeout(() => {
+//       setAnimationID('')
+//       const params = new URLSearchParams(searchParams)
+//       params.delete('animate')
+//     }, 500)
+//   }, [animate])
   return (
     <div className=''>
       <section>
         <div className="">
           <div className="mx-auto flex justify-center px-6 max-w-6xl text-gray-500">
             <div className="mt-12 flex flex-col max-w-[700px] gap-3">
-                {cards.length > 0 && <div className=" relative group overflow-hidden py-8 px-4 rounded-xl bg-white border border-gray-200 dark:border-gray-800 dark:bg-gray-900">
+              <Chatui/>
+                {/* {cards.length > 0 && <div className=" relative group overflow-hidden py-8 px-4 rounded-xl bg-white border border-gray-200 dark:border-gray-800 dark:bg-gray-900">
                   <div>
                     <div aria-hidden="true" className="inset-0 absolute aspect-video border rounded-full -translate-y-1/2 group-hover:-translate-y-1/4 duration-300  dark:from-white dark:to-white blur-2xl opacity-25 dark:opacity-5 dark:group-hover:opacity-10"></div>
                     <div className="relative mr-2">
@@ -49,7 +51,7 @@ const NetworkCards = ({ loading, setCreateModal, searchParams }) => {
                       </div>
                     </div>
                   </div>
-                </div>}
+                </div>} */}
               {/* one element */}
               {cards?.map((card) =>
                 <motion.div
