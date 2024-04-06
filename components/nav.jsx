@@ -5,11 +5,13 @@ import { Fragment, useEffect, useState } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { MagnifyingGlassIcon } from '@heroicons/react/20/solid'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
-import gov from './assets/govtech.png'
+// import gov from './assets/govtech.png'
+import gov from '@/public/govtech.png'
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { supabaseBrowser } from "../utils/supabase/client.ts";
+// import { supabaseBrowser } from "@/utils/supabase/client.js";
 import SearchComponent from './searchbar.jsx'
 
 const Nav = () => {

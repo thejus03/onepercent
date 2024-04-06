@@ -27,7 +27,7 @@ function ChatPage() {
   }, [])
   
   const handleSendMessage = async () => {
-    setMessages((prev)=>[...prev, {'role':'user','content':inputValue}])
+    setMessages((prev)=>([...prev, {'role':'user','content':inputValue}]))
     const response = await fetch('http://127.0.0.1:5000/chatbot',{
         method:'POST',
         body:JSON.stringify({
