@@ -1,16 +1,24 @@
+'use client'
 import { TiBusinessCard } from "react-icons/ti";
 import { useRouter } from "next/navigation";
 import { Fragment, useEffect, useState } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { MagnifyingGlassIcon } from '@heroicons/react/20/solid'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
-import gov from '@/public/govtech.png'
-import Link from 'next/link';
-import SearchComponent from './searchbar';
+import gov from './assets/govtech.png'
+import { usePathname } from "next/navigation";
+import Image from "next/image";
+import Link from "next/link";
+import { supabaseBrowser } from "../utils/supabase/client.ts";
+import SearchComponent from './searchbar.jsx'
+
 const Nav = () => {
   const router = useRouter()
-  const [loginData, setLoginData] = useState()
   const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const pathname = usePathname()
+  const supabase = supabaseBrowser();
+  const [loginData, setLoginData] = useState()
+
   async function signInWithLinkedIn() {
     const { data, error } = await supabase.auth.signInWithOAuth({
       provider: 'linkedin_oidc',
@@ -19,19 +27,22 @@ const Nav = () => {
       }
     })
   }
+
   async function signOutFromLinkedin() {
     await supabase.auth.signOut()
     setIsLoggedIn(false)
     router.push("/");
     router.refresh();
   }
+
   useEffect(() => {
     const getLoginData = async () => {
       const { data } = await supabase.auth.getSession();
+      // console.log(data);
       setLoginData(data)
-      if (data.session.user.user_metadata.name.length > 0) {
+      if (data.session?.user.user_metadata.name.length > 0) {
         setIsLoggedIn(true)
-        // when the user is logged in add it to the users table
+        // adding use to users table if not already added
         const response = await fetch('/api/user', {
           method: 'POST',
           headers: {
@@ -45,9 +56,13 @@ const Nav = () => {
           })
         })
       }
-      getLoginData()
+    }
+    getLoginData()
+    if (isLoggedIn) {
+      // alert("you are logged in and data is", loginData)
     }
   }, [isLoggedIn])
+
   return (
     <Disclosure as="nav" className="bg-gray-800">
       {({ open }) => (
@@ -55,22 +70,15 @@ const Nav = () => {
           <div className="mx-auto max-w-7xl px-2 sm:px-4 lg:px-8">
             <div className="relative flex h-16 items-center justify-between">
               <div className="flex items-center px-2 lg:px-0">
-                <div className="flex-shrink-0">
-                  <Link className="flex-shrink-0" href='/'>
-                    <Image
-                      className="h-8 w-auto"
-                      src={gov}
-                      width={50}
-                      height={50}
-                      alt="Your Company"
-                    />
-                  </Link>
-                  <img
+                <Link className="flex-shrink-0" href='/'>
+                  <Image
                     className="h-8 w-auto"
-                    src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
+                    src={gov}
+                    width={50}
+                    height={50}
                     alt="Your Company"
                   />
-                </div>
+                </Link>
                 <div className="hidden lg:ml-6 lg:block">
                   <div className="flex space-x-4">
                     {/* Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" */}
@@ -83,6 +91,7 @@ const Nav = () => {
                     >
                       Network
                     </a>
+
                   </div>
                 </div>
               </div>
@@ -115,7 +124,7 @@ const Nav = () => {
                 <div className="flex items-center">
                   <button
                     type="button"
-                    className="relative flex-shrink-0 rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                    className="relative flex-shrink-0 rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none "
                   >
                     <span className="absolute -inset-1.5" />
                     <span className="sr-only">View notifications</span>
@@ -125,14 +134,13 @@ const Nav = () => {
                   {/* Profile dropdown */}
                   <Menu as="div" className="relative ml-4 flex-shrink-0">
                     <div>
-                      <Menu.Button className="relative flex rounded-full bg-gray-800 text-sm text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                      <Menu.Button className="relative flex rounded-full bg-gray-800 text-sm text-white focus:outline-none">
                         <span className="absolute -inset-1.5" />
                         <span className="sr-only">Open user menu</span>
                         <TiBusinessCard size={30} />
                       </Menu.Button>
                     </div>
                     <Transition
-                      as={Fragment}
                       enter="transition ease-out duration-100"
                       enterFrom="transform opacity-0 scale-95"
                       enterTo="transform opacity-100 scale-100"
@@ -169,6 +177,7 @@ const Nav = () => {
                         <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                           <button
                             type='button'
+
                             onClick={signInWithLinkedIn}
                             className='text-black pl-4'
                           ><span className='text-sm'>Sign In</span>
