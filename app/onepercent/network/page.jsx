@@ -24,7 +24,7 @@ const NetworkCards = ({ loading, setCreateModal, searchParams }) => {
   const fetchUserDeets = async () => {
     const { data } = await supabase.auth.getSession();
     setUser(data)
-}
+  }
 
   useEffect(() => {
     setAnimationID(animate)
