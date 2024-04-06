@@ -33,7 +33,6 @@ CORS(app)
 @app.route("/chatbot", methods=["POST"])
 def openAI():
     conversations = request.json["messages"]
-    print(conversations)
     response = client.chat.completions.create(
         model="gpt-35-turbo",
         messages=conversations,
@@ -44,7 +43,8 @@ def openAI():
         {"role": "assistant", "content": response.choices[0].message.content}
     )
 
+    print(conversations)
     return jsonify({"conversations": conversations}), 200
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, port=8080)

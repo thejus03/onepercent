@@ -36,7 +36,11 @@ export async function checkUser(user_id) {
   if (data.length > 0) return true
   return false
 }
-
+export async function getNetworkCards() { 
+  const { data, error } = await supabase.from('network').select('*').order("created_at", { ascending: false }) 
+ 
+  return data 
+}
 export async function universalSearch(query) {
   if (query.length === 0) return
   const tags = await getAllTags()
@@ -60,6 +64,8 @@ export async function universalSearch(query) {
     return [];
   }
 
+  
+
   const { data: serviceData, error: serviceError } = await supabase
     .from('service')
     .select('html_id,title,description')
@@ -79,10 +85,29 @@ export async function universalSearch(query) {
   return combinedData;
 }
 
+export async function fetchFilteredNetworkUsingUid(user_id) {
+  let { data, error } = await supabase.from("network").select().match({ creator_id: user_id })
+  if (error) {
+    console.log("error fetching filtered posts using the user id", error)
+    return
+  }
+  // works
+  return data
+
+}
+
+export async function getAllTags() { 
+  const { data, error } = await supabase 
+    .from('tags') 
+    .select('*') 
+  let getAllTags = data.map((row) => (row.tags)) 
+  return getAllTags; 
+}
+
 // FOR chatbot
 export async function getChats(user_id) {
   let { data, error } = await supabase.from("chats").select().match({ id: user_id })
-  if (data?.length > 0) {
+  if (data.length > 0) {
     return data
   }
 }
@@ -91,7 +116,7 @@ export async function getChats(user_id) {
 export async function saveChat(message_array, user_id) {
   // remove the system message
   const fetchedChatsData = await getChats(user_id)
-  if (fetchedChatsData?.length > 0) {
+  if (fetchedChatsData.length > 0) {
     let clean_message_array = message_array.slice(1)
     // the previous messages
     let fetchedChatsArray = fetchedChats[0].messages
@@ -104,19 +129,6 @@ export async function saveChat(message_array, user_id) {
   }
 }
 
-export async function getAllTags() {
-  const { data, error } = await supabase
-    .from('tags')
-    .select('*')
-  let getAllTags = data.map((row) => (row.tags))
-  return getAllTags;
-}
-
-export async function getNetworkCards() {
-  const { data, error } = await supabase.from('network').select('*').order("created_at", { ascending: false })
-  return data
-}
-
 export async function getServices() {
   let { data, error } = await supabase.from("service").select()
   if (error) {
@@ -124,19 +136,4 @@ export async function getServices() {
     return
   }
   return data
-}
-
-export async function createNetworkPost(title, description, image, creator_id, tags, user_image, username) {
-  const html_id = crypto.randomBytes(4).toString('hex');
-  let { error } = await supabase.from("network").insert({
-    title: title,
-    description: description,
-    image: image,
-    creator_id: creator_id,
-    html_id: html_id,
-    tags: tags,
-    creator_image: user_image,
-    creator_name: username
-  })
-
 }
