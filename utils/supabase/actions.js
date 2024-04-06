@@ -79,6 +79,17 @@ export async function universalSearch(query) {
   return combinedData;
 }
 
+export async function fetchFilteredNetworkUsingUid(user_id) {
+  let { data, error } = await supabase.from("network").select().match({ creator_id: user_id })
+  if (error) {
+    console.log("error fetching filtered posts using the user id", error)
+    return
+  }
+  // works
+  return data
+
+}
+
 // FOR chatbot
 export async function getChats(user_id) {
   let { data, error } = await supabase.from("chats").select().match({ id: user_id })

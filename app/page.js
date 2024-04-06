@@ -1,7 +1,7 @@
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-row justify-between">
+    <main className="flex min-h-screen flex-row justify-between ">
       <div className="flex flex-col mx-9 w-full items-center">
         <div className=" mt-2 sm:w-[80%] w-[97%] max-w-[95vw] p-8 rounded-2xl flex justify-start ">
           Card

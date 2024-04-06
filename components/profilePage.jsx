@@ -1,7 +1,6 @@
 import { fetchUserDetails } from "@/utils/supabase/actions"
 const ProfileComponents = async ({ user_id }) => {
   const userDetails = await fetchUserDetails(user_id)
-  console.log("userDetailss:", userDetails)
   const user_name = userDetails?.user.user_metadata.name
   return (
     <div className="flex items-center justify-center align-middle mb-8 text-center">

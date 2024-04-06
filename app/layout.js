@@ -13,7 +13,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className='flex flex-col h-[100vh] overflow-auto'>
-        <Nav/>
+        <Nav />
         {children}
       </body>
     </html >
