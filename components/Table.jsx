@@ -8,7 +8,7 @@ export default function Table() {
   const fetchMASData = async () => {
     const response = await fetch('/api/MAS', { method: "GET" })
     const jsonData = await response.json()
-    console.log(jsonData.response.elements[0])
+    console.log(jsonData.response)
     setMASData(jsonData.response?.elements[0])
     setdayb4MASData(jsonData.dayb4response?.elements[0])
   }
