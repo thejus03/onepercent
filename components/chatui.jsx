@@ -2,14 +2,28 @@
 import React, { useEffect, useState } from 'react';
 import { IoMdSend } from "react-icons/io";
 import Image from 'next/image';
+import { getChats, saveChat } from '@/utils/supabase/actions';
+import { supabaseBrowser } from '@/utils/supabase/client';
 function ChatPage() {
+    const [dbchathistory, setdbchathistory] =useState([])
   const [inputValue, setInputValue] = useState('');
   const [messages, setMessages] = useState([{
     "role": "system", "content":"You are a chatbot for the Singapore Government that answers the questions accurately and succinctly to help businesses with their problems. Instructions: - Only answer questions about Singapore government. - If you are unsure about the question, then reply with 'I am not sure'. Context: - In the services page of our website, it has info about govt services. - In the network page, we can connect with other Singapore businesses."
     }]);
-    const messageList = [{'role':'user','content':'IM THE STUPID TEXT'},{'role':'assistant','content':'NO'}]
+    const [userID,setUserID] = useState('')
+    const supabase = supabaseBrowser()
   useEffect(() => {
-    //getChats()
+    const fetchUserID = async ()=>{
+        const { data } = await supabase.auth.getSession();
+        setUserID(data.session.user.id)
+    }
+    const fetchChatHistory = async (userid)=>{
+        const response = await getChats(userid)
+        const chathistory = response[0].messages
+        setdbchathistory(chathistory)
+    }
+    fetchUserID()
+    fetchChatHistory(userID)
   }, [])
   
   const handleSendMessage = async () => {
@@ -23,14 +37,15 @@ function ChatPage() {
       
   })
   const finalresponse = await response.json()
-  console.log(finalresponse)
+    setMessages(finalresponse)
+    saveChat(messages,userID)
 };
-
+    const finalMessageList = [...dbchathistory, ...messages.slice(1)]
   return (
     <div className="">
       <div className="p-4 bg-white overflow-auto h-[40vh] rounded-lg">
         <div className='space-y-4 w-auto flex flex-col'>
-        {messageList.map((message, index) => (
+        {finalMessageList.slice(1,-1).map((message, index) => (
           <div key={index} className={`${Object.keys(message)[0] == 'user' ?'justify-end': 'justify-start'} p-2 px-4 rounded-full flex `}>
             {Object.keys(message)[0] !== 'user' && <Image width={30} height={30} className='rounded-full overflow-hidden' src='/bot.png'/>}
             <span className='bg-gray-100 rounded-full ml-2 px-4 p-2'>{Object.values(message)[0]}</span>
