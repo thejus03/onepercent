@@ -39,9 +39,9 @@ export default function Table() {
 
                 <tr>
                   <td className="border-r border-gray-200 whitespace-nowrap py-1 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0">
-                    {MASData?.sora.toFixed(3)}
+                    {MASData?.sora?.toFixed(3)}
                   </td>
-                  <td className="whitespace-nowrap py-1 pl-4 pr-3 text-sm text-gray-900">{MASData?.sora_index.toFixed(3)}</td>
+                  <td className="whitespace-nowrap py-1 pl-4 pr-3 text-sm text-gray-900">{MASData?.sora_index?.toFixed(3)}</td>
                 </tr>
 
                 <tr>
