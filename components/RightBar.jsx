@@ -17,7 +17,7 @@ Disclosure Requirements: MAS mandates clear disclosure of key loan information, 
             <div className='space-y-4  bg-gradient-to-b mb-3 from-gray-700 mt-8 to-gray-800 w-[80%] p-8 rounded-xl shadow-lg'>
                 <h2 className='font-bold text-white'>BUDGET 2024</h2>
                 <p className=' text-gray-400'>Source: GoBusiness, 21 March 2024</p>
-                <p className=' text-gray-200'>The enhanced Enterprise Financing Scheme EFS) will support businesses to better access financing by: Extending the EFS-Trade Loan’s enhanced maximum loan quantum of $10 million until
+                <p className=' text-gray-200'>The enhanced Enterprise Financing Scheme EFS will support businesses to better access financing by: Extending the EFS-Trade Loan’s enhanced maximum loan quantum of $10 million until
 March 2025, at 50% Government risk-share. Extending the EFS-Project Loan for domestic construction projects until March 2025, at a maximum loan quantum of $15 million. Permanently increasing the maximum loan quantum of the EFS-Working Capital Loan to $500,000. <a href="https://www.gobusiness.gov.sg/images/budget2024/MTI%20Business%20Budget%20Booklet%202024_21%20Mar.pdf" className='text-blue-600 underline'> Read more here!</a></p>
             </div>
 

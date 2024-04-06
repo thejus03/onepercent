@@ -117,6 +117,15 @@ export async function getNetworkCards() {
   return data
 }
 
+export async function getServices() {
+  let { data, error } = await supabase.from("service").select()
+  if (error) {
+    console.log("error fetching the services", error)
+    return
+  }
+  return data
+}
+
 export async function createNetworkPost(title, description, image, creator_id, tags, user_image, username) {
   const html_id = crypto.randomBytes(4).toString('hex');
   let { error } = await supabase.from("network").insert({
