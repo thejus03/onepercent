@@ -1,9 +1,11 @@
 import React from 'react'
-
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from 'react'
 const Nav = () => {
-  return (
-    <div>Nav</div>
-  )
+    const router = useRouter()
+    return (
+        <div>Nav</div>
+    )
 }
 
 export default Nav
