@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify
 from dotenv import dotenv_values
 import os
 from openai import AzureOpenAI
+from flask_cors import CORS
 
 config = dotenv_values(".env")
 
@@ -13,6 +14,7 @@ client = AzureOpenAI(
 )
 
 app = Flask(__name__)
+CORS(app)
 
 # prompt = "How can i know if I am eligible for different government schemes"
 # response = client.chat.completions.create(
@@ -30,7 +32,7 @@ app = Flask(__name__)
 
 @app.route("/chatbot", methods=["POST"])
 def openAI():
-    conversations = request.json
+    conversations = request.json["messages"]
     response = client.chat.completions.create(
         model="gpt-35-turbo",
         messages=conversations,
@@ -41,7 +43,3 @@ def openAI():
         {"role": "assistant", "content": response.choices[0].message.content}
     )
     return jsonify({"response": response.choices[0].message.content}), 200
-
-
-if __name__ == "__main__":
-    app.run(debug=True)
