@@ -14,15 +14,16 @@ export default function SearchComponent() {
  
   const handleRedirect = (redirecturl, redirectsection, event) => { 
     const params = new URLSearchParams(searchParams) 
-    params.set("animate",redirectsection) 
-    replace(`${redirecturl =='network'&& 'network'}?${params.toString()}`) 
+    params.set("animate",redirectsection)
+    
+    router.push(`/${redirecturl =='network'? 'network':''}?${params.toString()}`) 
     setTimeout(()=>{ 
       const sectionElement = document.getElementById(redirectsection) 
     if (sectionElement) { 
       sectionElement.scrollIntoView({ behavior: 'smooth' }); 
     } 
     },1000) 
-     
+     setQuery('')
   } 
  
   const handleSearch = useDebouncedCallback((term) => { 
@@ -63,6 +64,7 @@ export default function SearchComponent() {
         placeholder="Search" 
         onChange={(e) => handleSearch(e.target.value)} 
         type="search" 
+        autoComplete='off'
       /> 
       {/* display search */} 
       <ul className={`absolute left-0 top-8 w-full mt-2 border-gray-300 rounded shadow-md z-10 ${queryResults?.length && 'bg-white border'}`}> 
