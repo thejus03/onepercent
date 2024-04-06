@@ -23,7 +23,7 @@ const NetworkCards = ({ loading, setCreateModal, searchParams }) => {
   const fetchUserDeets = async () => {
     const { data } = await supabase.auth.getSession();
     setUser(data)
-}
+  }
 
   useEffect(() => {
     setAnimationID(animate)
@@ -39,17 +39,17 @@ const NetworkCards = ({ loading, setCreateModal, searchParams }) => {
         <div className="">
           <div className="mx-auto flex justify-center px-6 max-w-6xl text-gray-500">
             <div className="mt-12 flex flex-col max-w-[700px] gap-3">
-                {cards.length > 0 && <div className=" relative group overflow-hidden py-8 px-4 rounded-xl bg-white border border-gray-200 dark:border-gray-800 dark:bg-gray-900">
-                  <div>
-                    <div aria-hidden="true" className="inset-0 absolute aspect-video border rounded-full -translate-y-1/2 group-hover:-translate-y-1/4 duration-300  dark:from-white dark:to-white blur-2xl opacity-25 dark:opacity-5 dark:group-hover:opacity-10"></div>
-                    <div className="relative mr-2">
-                      <div className="flex flex-row space-x-2 rounded-b-[--card-border-radius]">
-                        <Image className='rounded-full overflow-hidden' src={user?.session.user.user_metadata.picture} height={47} width={47} alt='' />
-                        <button onClick={()=>setCreateModal(true)} className='rounded-full flex justify-start w-full py-2 px-4 ring-1 ring-inset ring-gray-300 bg-gray-100'>Create Post...</button>
-                      </div>
+              {cards.length > 0 && <div className=" relative group overflow-hidden py-8 px-4 rounded-xl bg-white border border-gray-200 dark:border-gray-800 dark:bg-gray-900">
+                <div>
+                  <div aria-hidden="true" className="inset-0 absolute aspect-video border rounded-full -translate-y-1/2 group-hover:-translate-y-1/4 duration-300  dark:from-white dark:to-white blur-2xl opacity-25 dark:opacity-5 dark:group-hover:opacity-10"></div>
+                  <div className="relative mr-2">
+                    <div className="flex flex-row space-x-2 rounded-b-[--card-border-radius]">
+                      <Image className='rounded-full overflow-hidden' src={user?.session.user.user_metadata.picture} height={47} width={47} alt='' />
+                      <button onClick={() => setCreateModal(true)} className='rounded-full flex justify-start w-full py-2 px-4 ring-1 ring-inset ring-gray-300 bg-gray-100'>Create Post...</button>
                     </div>
                   </div>
-                </div>}
+                </div>
+              </div>}
               {/* one element */}
               {cards?.map((card) =>
                 <motion.div
