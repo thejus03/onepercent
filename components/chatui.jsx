@@ -4,7 +4,9 @@ import { IoMdSend } from "react-icons/io";
 import Image from 'next/image';
 import { getChats, saveChat } from '@/utils/supabase/actions';
 import { supabaseBrowser } from '@/utils/supabase/client';
-function ChatPage() {
+import { IoIosCloseCircle } from "react-icons/io";
+
+function ChatPage({setChatOpen}) {
   const [dbchathistory, setdbchathistory] =useState([])
 
   const [inputValue, setInputValue] = useState('');
@@ -67,8 +69,16 @@ function ChatPage() {
 };
     
   return (
-    <div className="">
-      <div className="p-4 bg-white overflow-auto h-[40vh] rounded-lg">
+    <div className="max-w-[300px] min-w-[300px]">
+      <div className='ring-2 flex flex-row justify-between px-4 items-center ring-gray-300 w-[300px] bg-white rounded-t-lg h-[55px]'>
+        <div className='flex flex-row'>
+          <Image width={30} height={30} src='/bot.png' />
+          <p className='ml-2 font-bold mt-[2px] '>Ask me</p>
+        </div>
+        <IoIosCloseCircle onClick={()=>setChatOpen(false)} size={30}/>
+      </div>
+      <div className="p-4 bg-white ring-2 ring-gray-300 overflow-auto h-[35vh] w-[300px]">
+        
         <div className='space-y-4 w-auto flex flex-col'>
         {messages?.length > 0 && messages?.slice(1).map((message, index) => (
           <div key={index} className={`${Object.keys(message)[0] == 'user' ?'justify-end': 'justify-start'} p-2 px-4 rounded-full flex `}>
@@ -78,7 +88,7 @@ function ChatPage() {
         ))}
         </div>
       </div>
-      <div className="flex flex-row chat-input w-full relative">
+      <div className="flex flex-row chat-input w-[300px] relative">
         <input
             type="text"
             name="text"
@@ -87,7 +97,7 @@ function ChatPage() {
               setInputValue(e.target.value)
             }}
             id="text"
-            className="block w-[50vw] rounded-lg border-0 px-4 py-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:outline-none sm:text-sm sm:leading-6"
+            className="block w-[300px] rounded-b-lg border-0 px-4 py-4 text-gray-900 shadow-sm ring-2 ring-gray-300 placeholder:text-gray-400 focus:outline-none sm:text-sm sm:leading-6"
             placeholder="Type here..."
         />
         <IoMdSend className='absolute right-1 top-3' onClick={()=>handleSendMessage(inputValue)} size={35}/>
