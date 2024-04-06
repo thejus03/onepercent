@@ -50,7 +50,7 @@ export default function Card() {
             <p className='text-xl ml-3  font-bold text-white mb-6'>💲Financial Services</p>
             <ul role="list" className="w-full gap-2 space-y-2 ">
                 {serviceList.map((service,i) =>
-                    <li key={service.html_id} id={service.html_id} className={`${service.category == 'finance' ?'':'hidden'} w-full md:w-[40vw] divide-y divide-gray-200 rounded-lg bg-white shadow`} onClick={() => setModal(true)}>
+                    <li key={service.html_id} id={service.html_id} className={`${service.category == 'finance' ?'':'hidden'} w-full md:w-[40vw] divide-y divide-gray-200 rounded-lg bg-white shadow`} onClick={() => setModal({title:service.title,desc:service.description})}>
                         <div className="flex w-full items-center justify-between space-x-6 p-6">
                             <div className="flex-1">
                                 <div className="flex items-center space-x-3">
@@ -68,7 +68,7 @@ export default function Card() {
             <p className='text-xl ml-3 font-bold text-white mb-6'>💪🏻Manpower Services</p>
             <ul role="list" className="w-full gap-2 space-y-2 ">
                 {serviceList.map((service,i) =>
-                    <li key={service.html_id}id={service.html_id} className={`${service.category == 'manpower'?'':'hidden'} w-full md:w-[40vw] divide-y divide-gray-200 rounded-lg bg-white shadow`} onClick={() => setModal(true)}>
+                    <li key={service.html_id} id={service.html_id} className={`${service.category == 'manpower'?'':'hidden'} w-full md:w-[40vw] divide-y divide-gray-200 rounded-lg bg-white shadow`} onClick={() => setModal({title:service.title,desc:service.description})}>
                         <div className="flex w-full items-center justify-between space-x-6 p-6">
                             <div className="flex-1 truncate">
                                 <div className="flex items-center space-x-3">
@@ -86,7 +86,7 @@ export default function Card() {
             <p className='text-xl ml-3 font-bold text-white mb-6'>🏢 Infrastructure Services</p>
             <ul role="list" className="w-full gap-2 space-y-2 ">
                 {serviceList.map((service,i) => 
-                    <li key={service.html_id}id={service.html_id} className= {`${service.category == 'infrastructure'?'': 'hidden' }  w-full md:w-[40vw] divide-y divide-gray-200 rounded-lg bg-white shadow`} onClick={() => setModal(true)}>
+                    <li key={service.html_id} id={service.html_id} className= {`${service.category == 'infrastructure'?'': 'hidden' }  w-full md:w-[40vw] divide-y divide-gray-200 rounded-lg bg-white shadow`} onClick={() => setModal({title:service.title,desc:service.description})}>
                         <div className="flex w-full items-center justify-between space-x-6 p-6">
                             <div className="flex-1 truncate">
                                 <div className="flex items-center space-x-3">
@@ -101,7 +101,7 @@ export default function Card() {
                 )}
             </ul>
             </div>
-            {modal && <Modal setModal={setModal} />}
+            {modal && <Modal setModal={setModal} modal={modal} />}
 
         </div>
     )

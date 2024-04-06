@@ -22,7 +22,7 @@ export default function SearchComponent() {
     if (sectionElement) { 
       sectionElement.scrollIntoView({ behavior: 'smooth' }); 
     } 
-    },1000) 
+    },3000) 
      setQuery('')
   } 
  

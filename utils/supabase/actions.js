@@ -1,5 +1,6 @@
 'use server'
 import { createClient } from "@supabase/supabase-js"
+import crypto from 'crypto'
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
 const supabaseKey = process.env.NEXT_SUPABASE_SERVICE_ROLE_KEY;
@@ -16,6 +17,21 @@ export async function fetchUserDetails(user_id) {
     return;
   }
   return data;
+}
+
+export async function createNetworkPost(title, description, image, creator_id, tags, user_image, username) {
+  const html_id = crypto.randomBytes(4).toString('hex');
+  let { error } = await supabase.from("network").insert({
+    title: title,
+    description: description,
+    image: image,
+    creator_id: creator_id,
+    html_id: html_id,
+    tags: tags,
+    creator_image: user_image,
+    creator_name: username
+  })
+
 }
 
 export async function addUser(user_id, name, email, profile_image) {
