@@ -1,10 +1,11 @@
 import React from 'react'
+import { TiBusinessCard } from "react-icons/ti";
 import { useRouter } from "next/navigation";
 import { Fragment, useEffect, useState } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { MagnifyingGlassIcon } from '@heroicons/react/20/solid'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
-import gov from './assets/govtech.png'
+import gov from '@/public/govtech.png'
 import Link from 'next/link';
 import SearchComponent from './searchbar';
 const Nav = () => {
@@ -128,11 +129,7 @@ const Nav = () => {
                       <Menu.Button className="relative flex rounded-full bg-gray-800 text-sm text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                         <span className="absolute -inset-1.5" />
                         <span className="sr-only">Open user menu</span>
-                        <img
-                          className="h-8 w-8 rounded-full"
-                          src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                          alt=""
-                        />
+                        <TiBusinessCard size={30} />
                       </Menu.Button>
                     </div>
                     <Transition
@@ -144,15 +141,14 @@ const Nav = () => {
                       leaveFrom="transform opacity-100 scale-100"
                       leaveTo="transform opacity-0 scale-95"
                     >
-                      <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                      {isLoggedIn ? <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                         <Menu.Item>
-                          {({ active }) => (
+                          {() => (
                             <a
-                              href="#"
-                              className={classNames(
-                                active ? 'bg-gray-100' : '',
-                                'block px-4 py-2 text-sm text-gray-700'
-                              )}
+                              href={`/profile/${loginData.session.user.id}`}
+                              className={`${pathname.startsWith('/profile') && 'bg-gray-100'}
+                                block px-4 py-2 text-sm text-gray-700
+                              `}
                             >
                               Your Profile
                             </a>
@@ -160,31 +156,25 @@ const Nav = () => {
                         </Menu.Item>
                         <Menu.Item>
                           {({ active }) => (
-                            <a
-                              href="#"
-                              className={classNames(
-                                active ? 'bg-gray-100' : '',
-                                'block px-4 py-2 text-sm text-gray-700'
-                              )}
-                            >
-                              Settings
-                            </a>
-                          )}
-                        </Menu.Item>
-                        <Menu.Item>
-                          {({ active }) => (
-                            <a
-                              href="#"
-                              className={classNames(
-                                active ? 'bg-gray-100' : '',
-                                'block px-4 py-2 text-sm text-gray-700'
-                              )}
+                            <button
+                              className={`${pathname.startsWith('/profile') && 'bg-gray-100'}
+                                block px-4 py-2 text-sm text-gray-700
+                              `}
+                              onClick={signOutFromLinkedin}
                             >
                               Sign out
-                            </a>
+                            </button>
                           )}
                         </Menu.Item>
-                      </Menu.Items>
+                      </Menu.Items> :
+                        <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                          <button
+                            type='button'
+                            onClick={signInWithLinkedIn}
+                            className='text-black pl-4'
+                          ><span className='text-sm'>Sign In</span>
+                          </button>
+                        </Menu.Items>}
                     </Transition>
                   </Menu>
                 </div>
@@ -197,31 +187,17 @@ const Nav = () => {
               {/* Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" */}
               <Disclosure.Button
                 as="a"
-                href="#"
+                href="/"
                 className="block rounded-md bg-gray-900 px-3 py-2 text-base font-medium text-white"
               >
-                Dashboard
+                Services
               </Disclosure.Button>
               <Disclosure.Button
                 as="a"
-                href="#"
+                href="/network"
                 className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
               >
-                Team
-              </Disclosure.Button>
-              <Disclosure.Button
-                as="a"
-                href="#"
-                className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
-              >
-                Projects
-              </Disclosure.Button>
-              <Disclosure.Button
-                as="a"
-                href="#"
-                className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
-              >
-                Calendar
+                Network
               </Disclosure.Button>
             </div>
             <div className="border-t border-gray-700 pb-3 pt-4">
