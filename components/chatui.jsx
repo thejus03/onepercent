@@ -27,7 +27,6 @@ function ChatPage() {
   }, [])
  let sendMessage =[] 
   const handleSendMessage = async (inputValue) => {
-    console.log("inputvalue",inputValue)
     // if (messages?.length ) {
     //   setMessages(prev=>[...prev, {'role':'user','content':inputValue}])
     // } 
@@ -40,7 +39,6 @@ function ChatPage() {
         sendMessage = [...messages,{'role':'user','content':inputValue}] 
       }
     // }
-      console.log("Before post sent ", sendMessage)
       setMessages(sendMessage)
       try {
       const response = await fetch('http://127.0.0.1:5000/chatbot',{
@@ -56,7 +54,6 @@ function ChatPage() {
     })
     const finalresponse = await response.json()
     setMessages(finalresponse.conversations)
-    console.log("Final response ",finalresponse)
   if (messages?.length>0 && dbchathistory?.length>0) { setFinalMesssageList([...dbchathistory, ...messages.slice(1)])} else if (dbchathistory?.length && messages?.length == 0) {
     setFinalMesssageList(dbchathistory) 
   } else if (dbchathistory?.length == 0 && messages?.length ) { setFinalMesssageList(messages)}
@@ -88,7 +85,6 @@ function ChatPage() {
             value={inputValue}
             onChange={(e)=>{
               setInputValue(e.target.value)
-              console.log(inputValue)
             }}
             id="text"
             className="block w-[50vw] rounded-lg border-0 px-4 py-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:outline-none sm:text-sm sm:leading-6"

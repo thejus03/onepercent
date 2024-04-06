@@ -39,7 +39,6 @@ const Nav = () => {
   useEffect(() => {
     const getLoginData = async () => {
       const { data } = await supabase.auth.getSession();
-      // console.log(data);
       setLoginData(data)
       if (data.session?.user.user_metadata.name.length > 0) {
         setIsLoggedIn(true)

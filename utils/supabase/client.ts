@@ -3,8 +3,7 @@ import { createBrowserClient } from '@supabase/ssr'
 // should be same across all apps
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-console.log('Supabase URL:', supabaseUrl);
-console.log('Supabase Key:', supabaseKey);
+
 
 export const supabaseBrowser = () =>
     createBrowserClient(supabaseUrl!, supabaseKey!);

@@ -42,7 +42,6 @@ const SearchComponent = () => {
       try {
         const results = await universalSearch(queryTerm)
         setQueryResults(results)
-        console.log(results[0].html_id)
       }
       catch (error) {
         console.log("error fetching search results", error)
