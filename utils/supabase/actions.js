@@ -81,9 +81,9 @@ export async function getChats(user_id) {
 // to save a chat, will need to call getChats and then append the message array
 export async function saveChat(message_array, user_id) {
   // remove the system message
-  let clean_message_array = message_array.slice(1)
   const fetchedChatsData = await getChats(user_id)
   if (fetchedChatsData.length > 0) {
+    let clean_message_array = message_array.slice(1)
     // the previous messages
     let fetchedChatsArray = fetchedChats[0].messages
     fetchedChatsArray.push(clean_message_array)
@@ -91,6 +91,6 @@ export async function saveChat(message_array, user_id) {
   }
   else {
     // there are no chats previously
-    let { error } = supabase.from("chats").insert({ messages: message_array })
+    let { error } = supabase.from("chats").insert({ messages: message_array, user_id: user_id })
   }
 }
