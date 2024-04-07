@@ -13,7 +13,6 @@ export default function Card() {
         const fetchServices = async () => {
             const services = await getServices()
             setServiceList(services)
-            console.log(services[0].category)
         }
         fetchServices()
     }, [])
