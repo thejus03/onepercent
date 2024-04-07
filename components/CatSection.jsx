@@ -1,3 +1,4 @@
+'use client'
 import {
   AcademicCapIcon,
   BanknotesIcon,
@@ -6,6 +7,8 @@ import {
   ReceiptRefundIcon,
   UsersIcon,
 } from '@heroicons/react/24/outline'
+import Modal from './Modal'
+import { useState } from 'react'
 
 const actions = [
 
@@ -31,6 +34,7 @@ function classNames(...classes) {
 }
 
 export default function CatSection() {
+  const [modal, setModal] = useState()
   return (
     <div className=" overflow-hidden rounded-lg shadow sm:grid sm:grid-cols-2 flex justify-center">
       {actions.map((action, actionIdx) => (
@@ -39,6 +43,7 @@ export default function CatSection() {
           className={
             'group relative bg-white p-6 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-500'
           }
+          onClick={() => setModal(true)}
         >
           <div>
             <span
@@ -73,6 +78,7 @@ export default function CatSection() {
           </span>
         </div>
       ))}
+      {modal && <Modal modal={modal} setModal={setModal} />}
     </div>
   )
 }

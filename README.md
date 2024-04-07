@@ -1,11 +1,18 @@
+Hackomania Project by Peng Kiang, Samarth, Thejus, Shouhe
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
 
-First, run the development server:
+
+First, install npm packages using:
+`npm i`
+
+and create a Python virtual environment in the backend folder and install using requirements.txt
 
 ```bash
-npm run dev
+npm run dev 
+python server.py
 # or
 yarn dev
 # or
