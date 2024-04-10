@@ -7,6 +7,7 @@ growing issue because the information pertaining to them are spread over various
 
 ## Features
 The app has the following features:
+- **Login** - Login through Linkedin account. Profile image and other credentials obtained by communicating with Linkedin API post login.
 - **Services Page** - Categorised schemes, permits and various other government services listed for easy access to check eligibility, benefits or specifications before applying for it via a form that can be sent directly to the concerning authorities.
 - **ChatBot** - Uses Azure OpenAI API to call and prompt the LLM which has been configured to answer questions regarding various schemes, grants, etc to fill in any gaps of information in the webapp.
 - **Universal Search** - Able to query through multiple Postgres (SQL) tables to return information on any page of the website.
