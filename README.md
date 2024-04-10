@@ -12,6 +12,13 @@ The app has the following features:
 - **Universal Search** - Able to query through multiple Postgres (SQL) tables to return information on any page of the website.
 - **Network Page** - Allows SMEs to post about their products or services that they want to sell for other SMEs to see. This brings greater exposure to them, allowing them to potentially gain clients and partners who want to work with them.
 
+### Services Page
+![main-page](https://github.com/thejus03/onepercent/assets/142730611/b5ec0e0f-1757-4458-bf6b-54a4e8e3517b)
+### ChatBot using OpenAI API
+![image_2024-04-10_11-45-06](https://github.com/thejus03/onepercent/assets/142730611/5bbc4db9-25df-4710-bfa9-5f0441dd6410)
+### Network Page
+![network-page](https://github.com/thejus03/onepercent/assets/142730611/a09a2843-33d1-49c8-a91b-00ff739a178a)
+
 ## Tech Stack
 - Nextjs
 - Tailwind CSS
